@@ -1,0 +1,22 @@
+[
+    {
+        "model": "levelupapi.event",
+        "pk": 1,
+        "fields": {
+            "game": 1,
+            "scheduler": 1,
+            "event_time": "2021-03-16T08:16:59.844Z",
+            "location": "Gamestop"
+        }
+    },
+    {
+        "model": "levelupapi.event",
+        "pk": 2,
+        "fields": {
+            "game": 2,
+            "scheduler": 1,
+            "event_time": "2021-03-15T08:16:59.844Z",
+            "location": "House of Games"
+        }
+    }
+]
