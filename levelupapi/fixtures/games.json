@@ -1,0 +1,24 @@
+[
+    {
+        "model": "levelupapi.game",
+        "pk": 1,
+        "fields": {
+            "gamer": 1,
+            "game_type": 1,
+            "title": "monopoly",
+            "number_of_players": 8,
+            "description": "Monopoly, real-estate board game for two to eight players."
+        }
+    },
+    {
+        "model": "levelupapi.game",
+        "pk": 2,
+        "fields": {
+            "gamer": 1,
+            "game_type": 2,
+            "title": "Turtle Dynasty Saga",
+            "number_of_players": 8,
+            "description": "Players battle for power and rule of Turtle Mountain"
+        }
+    }
+]
