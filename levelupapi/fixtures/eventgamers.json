@@ -1,0 +1,11 @@
+[
+    {
+        "model": "levelupapi.eventgamer",
+        "pk": 1,
+        "fields": {
+            "event": 2,
+            "gamer": 1
+        }
+            
+    }
+]
