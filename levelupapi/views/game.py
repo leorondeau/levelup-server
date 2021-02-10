@@ -25,17 +25,16 @@ class Games(ViewSet):
         # and set its properties from what was sent in the
         # body of the request from the client.
         game = Game()
-        game.title = request.data["title"]
-        game.maker = request.data["maker"]
-        game.number_of_players = request.data["numberOfPlayers"]
-        game.skill_level = request.data["skillLevel"]
         game.gamer = gamer
+        game.title = request.data["title"]
+        game.number_of_players = request.data["numberOfPlayers"]
+        game.description = request.data["description"]
 
         # Use the Django ORM to get the record from the database
         # whose `id` is what the client passed as the
         # `gameTypeId` in the body of the request.
         gametype = GameType.objects.get(pk=request.data["gameTypeId"])
-        game.gametype = gametype
+        game.game_type = gametype
 
         # Try to save the new game to the database, then
         # serialize the game instance as JSON, and send the
@@ -84,13 +83,15 @@ class Games(ViewSet):
         # from the database whose primary key is `pk`
         game = Game.objects.get(pk=pk)
         game.title = request.data["title"]
-        game.maker = request.data["maker"]
         game.number_of_players = request.data["numberOfPlayers"]
-        game.skill_level = request.data["skillLevel"]
-        game.gamer = gamer
+        game.description = request.data["description"]
+    
 
-        gametype = GameType.objects.get(pk=request.data["gameTypeId"])
-        game.gametype = gametype
+        game_type = GameType.objects.get(pk=request.data["gameTypeId"])
+        game.game_type = game_type
+        game.save()
+                
+        game.gamer = gamer
         game.save()
 
         # 204 status code means everything worked but the
@@ -128,10 +129,26 @@ class Games(ViewSet):
         #    http://localhost:8000/games?type=1
         #
         # That URL will retrieve all tabletop games
-        game_type = self.request.query_params.get('type', None)
+        game_type = self.request.query_params.get('label', None)
         if game_type is not None:
-            games = games.filter(gametype__id=game_type)
+            games = games.filter(game_type_id=game_type)
 
         serializer = GameSerializer(
             games, many=True, context={'request': request})
         return Response(serializer.data)
+
+
+class GameSerializer(serializers.ModelSerializer):
+    """JSON serializer for games
+
+    Arguments:
+        serializer type
+    """
+    class Meta:
+        model = Game
+        url = serializers.HyperlinkedIdentityField(
+            view_name='game',
+            lookup_field='id'
+        )
+        fields = ('id', 'title', 'number_of_players', 'description', 'game_type', 'gamer')
+        depth = 1
