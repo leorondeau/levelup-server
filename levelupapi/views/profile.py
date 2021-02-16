@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from levelupapi.models import Event, Gamer
+from levelupapi.models import Event, Gamer, Game
 
 
 class Profile(ViewSet):
@@ -18,7 +18,7 @@ class Profile(ViewSet):
             Response -- JSON representation of user info and events
         """
         gamer = Gamer.objects.get(user=request.auth.user)
-        events = Event.objects.filter(registrations__gamer=gamer)
+        events = Event.objects.filter(scheduler=gamer)
 
         events = EventSerializer(
             events, many=True, context={'request': request})
@@ -61,4 +61,4 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id', 'game', 'description', 'date', 'time')
+        fields = ('id', 'game', 'scheduler', 'event_time', 'location')
