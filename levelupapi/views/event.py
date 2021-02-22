@@ -100,6 +100,7 @@ class Events(ViewSet):
 
         # Set the `joined` property on every event
         for event in events:
+            #This is not necessary but just sets a default value
             event.joined = None
 
             try:
