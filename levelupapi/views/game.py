@@ -23,7 +23,7 @@ class Games(ViewSet):
 
         # Create a new Python instance of the Game class
         # and set its properties from what was sent in the
-        # body of the request from the client.
+        # body of the request from the client. Instantiating the model
         game = Game()
         game.gamer = gamer
         game.title = request.data["title"]
@@ -40,6 +40,7 @@ class Games(ViewSet):
         # serialize the game instance as JSON, and send the
         # JSON as a response to the client request
         try:
+            # .save() is going to attempt an INSERT sql statement
             game.save()
             serializer = GameSerializer(game, context={'request': request})
             return Response(serializer.data)
