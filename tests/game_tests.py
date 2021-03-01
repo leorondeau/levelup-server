@@ -80,10 +80,10 @@ class GameTests(APITestCase):
 
         # Seed the database with a game
         game = Game()
-        game.gametype = 1
+        game.game_type_id = 1
         # game.skill_level = 5
         game.title = "Monopoly"
-        game.maker = "Milton Bradley"
+        game.description = "Milton Bradley"
         game.number_of_players = 4
         game.gamer_id = 1
 
@@ -103,6 +103,6 @@ class GameTests(APITestCase):
 
         # Assert that the values are correct
         self.assertEqual(json_response["title"], "Monopoly")
-        self.assertEqual(json_response["maker"], "Milton Bradley")
-        self.assertEqual(json_response["skill_level"], 5)
+        self.assertEqual(json_response["description"], "Milton Bradley")
+        # self.assertEqual(json_response["skill_level"], 5)
         self.assertEqual(json_response["number_of_players"], 4)
