@@ -164,4 +164,4 @@ class GameTests(APITestCase):
 
         # GET GAME AGAIN TO VERIFY 404 response
         response = self.client.get(f"/games/{game.id}")
-        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
