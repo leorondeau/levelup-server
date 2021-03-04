@@ -33,12 +33,26 @@ class EventTests(APITestCase):
         gametype.label = "Board game"
         
         gametype.save()
-        game = Game()
-        game.game_type = gametype
-        game.title = "Balderdash"
-        game.number_of_players = 4
-        game.gamer_id = 1
-        game.save()
+        
+        url = "/games"
+        data = {
+            "gamer": 1,
+            "game_type": 1,
+            "title": "Balderdash",
+            "number_of_players": 2,
+            "description": "fun"
+        }
+
+        response = self.client.post(url, data, format='json')
+
+        json_response = json.loads(response.content)
+        
+        # game = Game()
+        # game.game_type = gametype
+        # game.title = "Balderdash"
+        # game.number_of_players = 4
+        # game.gamer_id = 1
+        # game.save()
        
         
     def test_create_event(self):
