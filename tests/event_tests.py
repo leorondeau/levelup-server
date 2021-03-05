@@ -33,6 +33,23 @@ class EventTests(APITestCase):
         gametype.label = "Board game"
         
         gametype.save()
+        
+        # url = "/games"
+        # data = {
+        #     "gamer": 1,
+        #     "game_type": 1,
+        #     "title": "Balderdash",
+        #     "number_of_players": 2,
+        #     "description": "fun"
+        # }
+
+        # response = self.client.post(url, data, format='json')
+
+        # json_response = json.loads(response.content)
+
+        # self.token = json_response["token"]
+        # self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        
         game = Game()
         game.game_type = gametype
         game.title = "Balderdash"
